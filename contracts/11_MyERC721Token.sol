@@ -77,7 +77,7 @@ contract MyERC721Token is IERC6093 {
         safeTransferFrom( from, to, tokenId, "");
     }
     
-    function transferFrom(address from, address to, uint256 tokenId) external payable override {
+    function transferFrom(address from, address to, uint256 tokenId) public payable override {
         if(tokenId >= currentTokenId)
             revert ERC721NonexistentToken(tokenId);
 
@@ -106,7 +106,7 @@ contract MyERC721Token is IERC6093 {
         }
     }
 
-    function approve(address approved, uint256 tokenId) external payable {
+    function approve(address approved, uint256 tokenId) public payable {
         if(tokenId >= currentTokenId)
             revert ERC721NonexistentToken(tokenId);
 
@@ -122,7 +122,7 @@ contract MyERC721Token is IERC6093 {
         emit Approval(tokenOwner, approved, tokenId);
     }
 
-    function setApprovalForAll(address operator, bool approved) external {
+    function setApprovalForAll(address operator, bool approved) public {
         if(operator == msg.sender || operator == address(0)) 
             revert ERC721InvalidOperator(operator);
 
