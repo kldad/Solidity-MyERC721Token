@@ -55,7 +55,7 @@ contract MyERC721Token is IERC6093 {
 
         if(isContract(to)) {
             bytes4 retval = IERC721Receiver(to).onERC721Received(msg.sender, from, tokenId, data);
-            if(retval == bytes4(keccak256("onERC721Received(address,address,uint256,bytes)")))
+            if(retval != bytes4(keccak256("onERC721Received(address,address,uint256,bytes)")))
                 revert ERC721InvalidReceiver(to);
         }
 
